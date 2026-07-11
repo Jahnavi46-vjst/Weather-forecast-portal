@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkyFlow | Weather Forecast Portal</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- CSS Styling -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="logo-icon"><path d="M17.5 19A3.5 3.5 0 0 0 21 15.5c0-2.79-2.54-4.5-5-4.5-.42 0-.83.04-1.24.11a6.002 6.002 0 0 0-11.62 1.13c0 .09.01.18.01.27A5 5 0 0 0 3 22h14.5c.3 0 .5-.2.5-.5z"/></svg>
+        <h1>SkyFlow</h1>
+      </div>
+      <div class="header-actions">
+        <button id="settings-toggle-btn" class="icon-btn" title="Settings">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Grid -->
+    <main class="main-layout">
+      
+      <!-- Left column: Search and Settings -->
+      <section class="control-panel">
+        <!-- Search Box -->
+        <div class="glass-card search-card">
+          <h2>Find Weather</h2>
+          <form id="search-form" class="search-form">
+            <div class="search-input-wrapper">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="city-input" placeholder="Enter city name... (e.g. London)" required autocomplete="off">
+            </div>
+            <button type="submit" class="btn primary-btn">Search</button>
+          </form>
+          <div class="quick-links">
+            <span class="quick-link-label">Quick Search:</span>
+            <button class="quick-city-btn">London</button>
+            <button class="quick-city-btn">New York</button>
+            <button class="quick-city-btn">Tokyo</button>
+            <button id="quick-fav-btn" class="quick-city-btn fav-city-badge" style="display: none;">⭐ Favorite</button>
+          </div>
+        </div>
+
+        <!-- Settings Box -->
+        <div class="glass-card settings-card" id="settings-card">
+          <div class="settings-header">
+            <h2>User Settings</h2>
+            <span class="database-badge">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="db-icon"><path d="M12 22c5.523 0 10-2.239 10-5V7c0-2.761-4.477-5-10-5S2 4.239 2 7v10c0 2.761 4.477 5 10 5z"/><path d="M22 7c0 2.761-4.477 5-10 5S2 9.761 2 7"/><path d="M2 12c0 2.761 4.477 5 10 5s10-2.239 10-5"/></svg>
+              SQL SQLite
+            </span>
+          </div>
+          <form id="settings-form">
+            <div class="form-group">
+              <label>Temperature Unit</label>
+              <div class="radio-toggle">
+                <input type="radio" id="unit-c" name="temp_unit" value="C" checked>
+                <label for="unit-c">Celsius (°C)</label>
+                <input type="radio" id="unit-f" name="temp_unit" value="F">
+                <label for="unit-f">Fahrenheit (°F)</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Display Theme</label>
+              <div class="radio-toggle">
+                <input type="radio" id="theme-dark" name="theme" value="dark" checked>
+                <label for="theme-dark">Dark Mode</label>
+                <input type="radio" id="theme-light" name="theme" value="light">
+                <label for="theme-light">Light Mode</label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="fav-city-input">Favorite City (Loads on Startup)</label>
+              <input type="text" id="fav-city-input" placeholder="e.g. Paris" autocomplete="off">
+            </div>
+
+            <button type="submit" class="btn secondary-btn w-full">Save Settings to DB</button>
+          </form>
+          <div id="settings-status" class="status-msg"></div>
+        </div>
+      </section>
+
+      <!-- Right column: Weather Dashboard -->
+      <section class="display-panel">
+        <div id="weather-loader" class="loader-container" style="display: none;">
+          <div class="loader"></div>
+          <p>Fetching real-time weather...</p>
+        </div>
+
+        <div id="weather-error" class="error-container" style="display: none;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="error-icon"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <h3>City Not Found</h3>
+          <p id="error-message">Could not retrieve weather data. Please check the spelling and try again.</p>
+        </div>
+
+        <!-- Weather Display Card -->
+        <div id="weather-card" class="glass-card weather-display-card" style="display: none;">
+          <div class="weather-main-info">
+            <div class="location-details">
+              <h2 id="weather-city">London</h2>
+              <p id="weather-country">United Kingdom</p>
+              <span id="fav-indicator" class="fav-star-badge" title="Saved Favorite">★ Favorite</span>
+            </div>
+            <div class="weather-graphic">
+              <div id="weather-icon-container">
+                <!-- SVG weather icon injected by JS -->
+              </div>
+              <div class="temp-condition">
+                <span id="weather-temp">15°C</span>
+                <span id="weather-desc">Partly Cloudy</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Extra details grid -->
+          <div class="weather-metrics-grid">
+            <div class="metric-item">
+              <div class="metric-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+              </div>
+              <div class="metric-data">
+                <span class="metric-label">Apparent Temp</span>
+                <span id="metric-apparent" class="metric-val">14°C</span>
+              </div>
+            </div>
+
+            <div class="metric-item">
+              <div class="metric-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-4.3-7-11-7-11S5 10.7 5 15a7 7 0 0 0 7 7z"/></svg>
+              </div>
+              <div class="metric-data">
+                <span class="metric-label">Humidity</span>
+                <span id="metric-humidity" class="metric-val">68%</span>
+              </div>
+            </div>
+
+            <div class="metric-item">
+              <div class="metric-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/></svg>
+              </div>
+              <div class="metric-data">
+                <span class="metric-label">Wind Speed</span>
+                <span id="metric-wind" class="metric-val">12 km/h</span>
+              </div>
+            </div>
+
+            <div class="metric-item">
+              <div class="metric-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <div class="metric-data">
+                <span class="metric-label">Local Time</span>
+                <span id="metric-time" class="metric-val">05:30 AM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Explainer/Intro Card (Shown by default or as fallback) -->
+        <div id="intro-card" class="glass-card intro-card">
+          <h2>Welcome to SkyFlow Portal</h2>
+          <p>This web application showcases real-time weather integration and user preferences storage using a lightweight SQL backend database.</p>
+          
+          <div class="feature-highlights">
+            <div class="feature-badge">
+              <strong>Frontend API Integration:</strong>
+              <span>Uses Open-Meteo Geocoding & Weather REST APIs to fetch real-time atmospheric states without API keys.</span>
+            </div>
+            <div class="feature-badge">
+              <strong>SQL Settings DB:</strong>
+              <span>Your favorite city, theme preference, and temperature scales are saved securely in a backend SQLite database.</span>
+            </div>
+            <div class="feature-badge">
+              <strong>Dynamic UI:</strong>
+              <span>Uses CSS Custom Variables to instantly transition between Light and Dark mode, with full responsiveness built in.</span>
+            </div>
+          </div>
+          <p class="cta-text">Enter a city in the box or click a quick-link above to begin!</p>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>SkyFlow Weather Portal • Node.js, SQLite, Vanilla HTML/CSS/JS</p>
+    </footer>
+  </div>
+
+  <!-- JavaScript logic -->
+  <script src="app.js"></script>
+</body>
+</html>
