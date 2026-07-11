@@ -1,0 +1,14 @@
+{
+  "name": "weather-forecast-portal",
+  "version": "1.0.0",
+  "description": "A simple and explainable Weather Forecast Portal with SQLite backend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  }
+}
